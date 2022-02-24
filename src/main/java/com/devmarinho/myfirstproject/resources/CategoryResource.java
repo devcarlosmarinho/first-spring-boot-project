@@ -15,8 +15,10 @@ import com.devmarinho.myfirstproject.repositories.CategoryRepository;
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource {
+
 	@Autowired
 	private CategoryRepository categoryRepository;
+
 	@GetMapping
 	public ResponseEntity<List<Category>> findAll() {
 		List<Category> list = categoryRepository.findAll();
@@ -25,8 +27,7 @@ public class CategoryResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Category> findById(@PathVariable Long id) {
-		Category cat = categoryRepository.findById(id);
-
+		Category cat = categoryRepository.findById(id).get();
 		return ResponseEntity.ok().body(cat);
 	}
 }
